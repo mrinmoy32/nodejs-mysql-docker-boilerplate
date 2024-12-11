@@ -19,11 +19,6 @@ function checkValidationErrors(req) {
 }
 
 exports.list_users = (req, res, next) => {
-  const validationCheck = checkValidationErrors(req, res, next);
-  if (validationCheck) {
-    return res.status(400).json(validationCheck);
-  }
-
   database('user')
     .select('id', 'name', 'email')
     .then((users) => {
