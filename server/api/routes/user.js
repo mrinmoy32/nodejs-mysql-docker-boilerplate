@@ -8,6 +8,7 @@ const checkAuth = require('../middleware/check-auth');
 const validationSchemas = require('../middleware/validation-schemas');
 
 
+router.get("/userlist", UserController.list_users);
 
 router.post("/signup", validationSchemas.user.signup, UserController.user_signup);
 
