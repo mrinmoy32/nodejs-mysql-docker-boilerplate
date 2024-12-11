@@ -18,6 +18,27 @@ function checkValidationErrors(req) {
   return false;
 }
 
+exports.list_users = (req, res, next) => {
+  const validationCheck = checkValidationErrors(req, res, next);
+  if (validationCheck) {
+    return res.status(400).json(validationCheck);
+  }
+
+  database('user')
+    .select('id', 'name', 'email')
+    .then((users) => {
+      res.status(200).json({
+        message: 'Users retrieved successfully',
+        data: users,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
 
 
 exports.user_signup = (req, res) => {
